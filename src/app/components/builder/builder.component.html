@@ -1,0 +1,58 @@
+<div class="question-list-form">
+  <form>
+    <div *ngIf="questionList.length > 0">
+      <div *ngFor="let question of questionList; index as i" class="question">
+        <ng-container *ngIf="question?.type === questionTypeValue.Checkbox">
+          <app-checkbox-answer [questionItem]="question"
+            (questionItemChange)="questionItemChange($event, i)"></app-checkbox-answer>
+        </ng-container>
+        <ng-container *ngIf="question?.type === questionTypeValue.Text">
+          <app-text-answer [questionItem]="question"></app-text-answer>
+        </ng-container>
+      </div>
+    </div>
+
+    <button pButton type="button" [label]="questionList.length > 0 ? 'Add New Question' : 'Add Question'"
+      class="p-button-outlined" (click)="showBuilderForm()"></button>
+    <div class="review-answers" *ngIf="questionList.length > 0">
+      <a routerLink="/form/answers">Review my answers ></a>
+    </div>
+  </form>
+</div>
+
+<!-- Add new question -->
+<p-dialog *ngIf="display" header="Add a New Questions" [(visible)]="display" [modal]="true">
+  <form [formGroup]="questionForm" class="new-question-form" (ngSubmit)="onSubmitNewQuestion()">
+    <p-dropdown [options]="questionTypes" optionLabel="label" optionValue="value" formControlName="type"
+      [(ngModel)]="selectedType" (onChange)="onTypeChange()"></p-dropdown>
+    <span *ngIf="checkErrMsg(questionForm.controls['question'])" class="err-msg">Required!</span>
+    <input type="text" pInputText placeholder="Type question here" formControlName="question" />
+    <ng-container formArrayName="answers" *ngIf="displayOptions">
+      <div *ngFor="let _ of answers.controls; index as i" class="form-array-answers">
+        <ng-container [formGroupName]="i">
+          <span *ngIf="checkErrMsg(questionForm.controls['answers'], i)" class="err-msg">Required!</span>
+          <input type="text" pInputText placeholder="Add Answer Option" formControlName="answer" />
+        </ng-container>
+      </div>
+    </ng-container>
+
+    <label *ngIf="displayOptions && questionForm.controls['answers'].controls.length < 5" (click)="onAddNewAnswer()"
+      class="add-new-answer">+
+      Add another
+      answer</label>
+    <label *ngIf="displayOptions && questionForm.controls['answers'].controls.length > 2" (click)="onRemoveLastAnswer()"
+      class="remove-last-answer">- Remove
+      last
+      answer</label>
+
+    <p-checkbox *ngIf="displayOptions" name="otheranswer" label="Allow user to specify their own answer"
+      formControlName="isOtherAnswer" [binary]="true"></p-checkbox>
+    <p-checkbox name="isrequired" label="This field is required" formControlName="isRequired"
+      [binary]="true"></p-checkbox>
+
+    <div class="question-form-footer">
+      <button pButton type="submit" label="Submit"></button>
+    </div>
+
+  </form>
+</p-dialog>

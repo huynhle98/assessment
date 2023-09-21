@@ -1,0 +1,76 @@
+.question-list-form {
+  p-checkbox {
+    margin-bottom: 5px;
+  }
+
+  .checkbox-form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .p-inputtextarea {
+    min-width: 400px;
+  }
+
+  .review-answers {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .question {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  .question-list {
+    max-height: 50vh;
+    overflow: auto;
+    padding-bottom: 10px;
+  }
+}
+
+.new-question-form ::ng-deep {
+  display: flex;
+  flex-wrap: wrap;
+  width: 500px;
+
+  .form-array-answers,
+  p-dropdown,
+  .p-dropdown,
+  .p-inputtext,
+  p-checkbox {
+    width: 100%;
+  }
+
+  .form-array-answers>.p-inputtext,
+  >p-checkbox,
+  >p-dropdown,
+  >.p-inputtext {
+    margin-bottom: 10px;
+  }
+
+  .add-new-answer {
+    margin-bottom: 20px;
+    cursor: pointer;
+    color: #3B82F6;
+    margin-right: 20px;
+  }
+
+  .remove-last-answer {
+    margin-bottom: 20px;
+    cursor: pointer;
+    color: #EF4444;
+  }
+
+  .question-form-footer {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+
+:host::ng-deep {
+  .p-inputtextarea {
+    width: 250px;
+  }
+}

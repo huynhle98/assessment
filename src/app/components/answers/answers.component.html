@@ -1,0 +1,33 @@
+<div class="view-answer-bg">
+  <div class="view-answer">
+    <ng-container *ngFor="let question of questionList">
+      <ng-container *ngIf="question">
+        <p class="view-answer__label">{{ question.question }}</p>
+        <div class="view-answer__content">
+          <ng-container *ngIf="question.answers?.length">
+            <ng-container *ngFor="let answer of question.answers">
+              <ng-container
+                *ngIf="
+                  question.type === questionTypeValue.Checkbox;
+                  else textTemplate
+                "
+              >
+                <span *ngIf="!!answer.isChecked">
+                  {{ answer.answer }}
+                  <span *ngIf="answer.otherAnswer">
+                    - {{ answer.otherAnswer }}
+                  </span>
+                  <br />
+                </span>
+              </ng-container>
+              <ng-template #textTemplate>
+                <span>{{ answer.answer }}</span>
+              </ng-template>
+            </ng-container>
+          </ng-container>
+        </div>
+      </ng-container>
+    </ng-container>
+  </div>
+  <a routerLink="/form/builder">Back to Forms Builder</a>
+</div>

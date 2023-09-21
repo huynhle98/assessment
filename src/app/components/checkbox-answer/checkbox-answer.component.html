@@ -1,0 +1,16 @@
+<form [formGroup]="answerForm">
+  <h4>{{questionItem.question}} <span *ngIf="questionItem.isRequired">*</span></h4>
+  <div class="checkbox-form" formArrayName="items">
+    <ng-container *ngFor="let ans of answerForm.controls['items'].controls; index as i">
+      <div [formGroupName]="i">
+        <ng-container *ngIf="ans.controls.text.value as checkboxValue">
+          <p-checkbox [label]="checkboxValue" [binary]="true" formControlName="checkbox"
+            (ngModelChange)="onChangeCheckBox()"></p-checkbox>
+        </ng-container>
+      </div>
+    </ng-container>
+  </div>
+  <ng-container *ngIf="isChooseOtherValue()">
+    <textarea pInputTextarea formControlName="otherAnswer" (ngModelChange)="onChangeCheckBox()"></textarea>
+  </ng-container>
+</form>

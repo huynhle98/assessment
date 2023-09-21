@@ -1,0 +1,4 @@
+<form [formGroup]="textForm">
+  <h4>{{questionItem.question}} <span *ngIf="questionItem.isRequired">*</span></h4>
+  <textarea pInputTextarea formControlName="answerText" (ngModelChange)="onChangeAnswer()"></textarea>
+</form>

@@ -1,0 +1,10 @@
+/* You can add global styles to this file, and also import other style files */
+.err-msg {
+  color: #EF4444;
+  font-style: italic;
+  font-size: 13px;
+}
+
+h4 {
+  margin: 10px 0;
+}
