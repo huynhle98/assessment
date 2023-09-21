@@ -125,4 +125,24 @@ export class BuilderComponent extends BaseAbstractComponent implements OnInit {
     this.questionList[index] = question;
     this.appService.questionList$.next(this.questionList)
   }
+
+  isFilledAnswers(): boolean {
+    if (!this.questionList?.length) {
+      return false;
+    }
+
+    let countFilled = 0;
+    for (let index = 0; index < this.questionList.length; index++) {
+      if (this.questionList[index].type === this.questionTypeValue.Text && !!this.questionList[index]?.answers?.[0].answer) {
+        countFilled++;
+        continue;
+      }
+
+      const hasChecked = this.questionList[index].answers?.some(answer => answer.isChecked)
+      if (hasChecked) {
+        countFilled++;
+      }
+    }
+    return countFilled === this.questionList.length;
+  }
 }

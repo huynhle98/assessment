@@ -28,9 +28,6 @@ export class AnswersComponent extends BaseAbstractComponent implements OnInit {
         return;
       }
 
-      console.log('questions', questions);
-
-
       this.questionList = questions;
     }))
   }
